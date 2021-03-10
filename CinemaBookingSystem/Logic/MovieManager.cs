@@ -37,12 +37,31 @@ namespace CinemaBookingSystem.Logic
             }
         }
         // getting movies that are coming soon
-        //public List<Movies> GetComingSoonMovies()
-        //{
-        //    using(var db = new CinemaDb())
-        //    {
-        //        return db.Movies.Where(m => m.PlayingTime < DateTime.Today()).ToList();
-        //    }
-        //}
+        public List<Movies> GetComingSoonMovies()
+        {
+            using (var db = new CinemaDb())
+            {
+                DateTime today = DateTime.Today;
+                var nextMonthStart = today.AddMonths(1).AddSeconds(1);
+                var nextMonthEnd = nextMonthStart.AddMonths(1).AddSeconds(-1);
+
+                return db.Movies.Where(m => m.PlayingTime > nextMonthStart)
+                                .OrderBy(m => m.PlayingTime)
+                                .ToList();
+            }
+        }
+
+        public List<Movies> GetMoviesPlayingThisWeek()
+        {
+            using (var db = new CinemaDb())
+            {
+                DateTime today = DateTime.Today;
+                var thisWeekStart = today.AddDays(-(int)today.DayOfWeek);
+                var thisWeekEnd = today.AddDays(7).AddSeconds(-1);
+
+                return db.Movies.Where(m => m.PlayingTime >= thisWeekStart && m.PlayingTime <= thisWeekEnd)
+                                .OrderBy(m => m.PlayingTime).ToList();
+            }
+        }
     }
 }

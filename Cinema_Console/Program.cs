@@ -12,7 +12,7 @@ namespace CinemaBookingSystem
         {
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine("Welcome to Our Cinema!");
+            Console.Write("Welcome to Our Cinema!");
             Console.WriteLine();
             Console.Write("The list of Movie Categories: ");
             Console.ResetColor();
@@ -25,13 +25,37 @@ namespace CinemaBookingSystem
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("This month we are showing these movies: ");
+            Console.Write("This month's features: ");
             Console.ResetColor();
             Console.WriteLine();
 
             movie.GetMoviesPlayingThisMonth().ForEach(movie =>
             {
-                Console.WriteLine("'{0}' playing on {1}", movie.Title, movie.PlayingTime);
+                Console.WriteLine("Movie '{0}' (id# {1}) ----  playing on --- {2}", movie.Title, movie.Id, movie.PlayingTime);
+            });
+
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("This week's features: ");
+            Console.ResetColor();
+            Console.WriteLine();
+
+            movie.GetMoviesPlayingThisWeek().ForEach(movie =>
+            {
+                Console.WriteLine("Movie '{0}' (id# {1}) ----  playing on --- {2}", movie.Title, movie.Id, movie.PlayingTime);
+            });
+
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Coming soon:");
+            Console.ResetColor();
+            Console.WriteLine();
+
+            movie.GetComingSoonMovies().ForEach(movie =>
+            {
+                Console.WriteLine("Movie '{0}' (id# {1}) ----  playing on --- {2}", movie.Title, movie.Id, movie.PlayingTime);
             });
         }
     }
