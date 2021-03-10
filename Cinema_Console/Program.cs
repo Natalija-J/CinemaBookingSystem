@@ -10,8 +10,8 @@ namespace CinemaBookingSystem
         private static BookingManager booking = new BookingManager();
         static void Main(string[] args)
         {
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.Black;
+            BackgroundColorGreen();
+            ForegroundColorBlack();
             Console.Write("Welcome to Our Cinema!");
             Console.WriteLine();
             Console.Write("The list of Movie Categories: ");
@@ -20,43 +20,80 @@ namespace CinemaBookingSystem
 
             category.GetAllCategories().ForEach(category =>
             {
-                Console.WriteLine(category.Title);
+                Console.WriteLine("Movie id#: {0}, Category: {1}", category.Id, category.Title);
             });
             Console.WriteLine();
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.Black;
+            BackgroundColorGreen();
+            ForegroundColorBlack();
             Console.Write("This month's features: ");
             Console.ResetColor();
             Console.WriteLine();
 
             movie.GetMoviesPlayingThisMonth().ForEach(movie =>
             {
-                Console.WriteLine("Movie '{0}' (id# {1}) ----  playing on --- {2}", movie.Title, movie.Id, movie.PlayingTime);
+                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
             });
 
             Console.WriteLine();
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.Black;
+            BackgroundColorGreen();
+            ForegroundColorBlack();
             Console.Write("This week's features: ");
             Console.ResetColor();
             Console.WriteLine();
 
             movie.GetMoviesPlayingThisWeek().ForEach(movie =>
             {
-                Console.WriteLine("Movie '{0}' (id# {1}) ----  playing on --- {2}", movie.Title, movie.Id, movie.PlayingTime);
+                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
             });
 
             Console.WriteLine();
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.Black;
+            BackgroundColorGreen();
+            ForegroundColorBlack();
             Console.Write("Coming soon:");
             Console.ResetColor();
             Console.WriteLine();
 
             movie.GetComingSoonMovies().ForEach(movie =>
             {
-                Console.WriteLine("Movie '{0}' (id# {1}) ----  playing on --- {2}", movie.Title, movie.Id, movie.PlayingTime);
+                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
             });
+
+            Console.WriteLine();
+            BackgroundColorGreen();
+            ForegroundColorBlack();
+            Console.Write("Coming soon:");
+            Console.ResetColor();
+            Console.WriteLine();
+
+            movie.GetComingSoonMovies().ForEach(movie =>
+            {
+                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
+            });
+
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Red;
+            ForegroundColorBlack();
+            Console.Write("Please choose a movies by the category:");
+            Console.ResetColor();
+            int chosenCategory = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            movie.GetMoviesByCategory().FindAll(movie => movie.Category == chosenCategory)
+
+            movie.GetComingSoonMovies().Where(movie => movie.Category == chosenCategory).Foreach(movie =>
+            {
+                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
+            });
+
+            static void BackgroundColorGreen()
+            {
+                Console.BackgroundColor = ConsoleColor.Green;
+            }
+
+            static void ForegroundColorBlack()
+            {                
+                Console.ForegroundColor = ConsoleColor.Black;              
+            }
+
         }
     }
 }

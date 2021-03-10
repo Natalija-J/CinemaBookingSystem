@@ -8,13 +8,15 @@ namespace CinemaBookingSystem.Logic
 {
     public class BookingManager
     {
-        public List<Bookings> GetAllBookings()
+        //Movies chosen by title
+        public List<Movies> GetAllBookings(string title)
         {
-            //returns Topics, ordered by Title ASC
+            //returns a movie that a client chose
             using (var db = new CinemaDb())
             {
-                // SELECT * FROM Topics ORDER BY Title
-                return db.Bookings.OrderBy(b => b.MovieId).ToList();
+                var chosenMovie = new MovieManager();
+                
+                return db.Movies.Where(m => m.Title.ToLower() == title.ToLower()).ToList();
             }
         }
     }

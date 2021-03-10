@@ -29,11 +29,11 @@ namespace CinemaBookingSystem.Logic
             }
         }
         //get movies by their category
-        public List<Movies> GetMoviesByCategory(string category)
+        public List<Movies> GetMoviesByCategory(int category)
         {
             using(var db = new CinemaDb())
             {
-                return db.Movies.Where(m => m.Category.ToLower() == category.ToLower()).ToList();
+                return db.Movies.Where(m => m.Category == category).ToList();
             }
         }
         // getting movies that are coming soon
