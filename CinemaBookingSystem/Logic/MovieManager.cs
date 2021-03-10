@@ -14,7 +14,7 @@ namespace CinemaBookingSystem.Logic
             using (var db = new CinemaDb())
             {
                 // SELECT TOP 6 * FROM Movies ORDER BY Playing date - today
-                return db.Movies.OrderBy(m => m.PlayingTime ==DateTime.Today).Take(count).ToList();
+                return db.Movies.OrderBy(m => m.PlayingTime == DateTime.Today).Take(count).ToList();
             }
         }
         //get movies by their category
