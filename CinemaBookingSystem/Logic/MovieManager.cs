@@ -11,13 +11,6 @@ namespace CinemaBookingSystem.Logic
         //getting movies that are playing now
         public List<Movies> GetMoviesPlayingThisMonth()
         {
-                                   
-            //var thisWeekStart = baseDate.AddDays(-(int)baseDate.DayOfWeek);
-            //var thisWeekEnd = thisWeekStart.AddDays(7).AddSeconds(-1);
-           
-            //var thisMonthStart = baseDate.AddDays(1 - baseDate.Day);
-            //var thisMonthEnd = thisMonthStart.AddMonths(1).AddSeconds(-1);
-            
             using (var db = new CinemaDb())
             {
                 DateTime today = DateTime.Today;
@@ -31,12 +24,13 @@ namespace CinemaBookingSystem.Logic
         //get movies by their category
         public List<Movies> GetMoviesByCategory(int category)
         {
-            using(var db = new CinemaDb())
+            using (var db = new CinemaDb())
             {
                 return db.Movies.Where(m => m.Category == category).ToList();
             }
         }
-        // getting movies that are coming soon
+        
+        //getting movies that are coming soon
         public List<Movies> GetComingSoonMovies()
         {
             using (var db = new CinemaDb())
