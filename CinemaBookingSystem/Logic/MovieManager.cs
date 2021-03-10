@@ -9,12 +9,15 @@ namespace CinemaBookingSystem.Logic
     public class MovieManager
     {
         //getting movies that are playing now
-        public List<Movies> GetMoviesPlayingToday(int count = 6)
+        public List<Movies> GetMoviesPlayingThisWeek()
         {
             using (var db = new CinemaDb())
             {
-                // SELECT TOP 6 * FROM Movies ORDER BY Playing date - today
-                return db.Movies.OrderBy(m => m.PlayingTime == DateTime.Today).Take(count).ToList();
+                DateTime today = DateTime.Today;
+                DateTime week = today.AddDays(7);
+                                
+                return db.Movies.Where(m => m.PlayingTime == week)
+                                .OrderByDescending(m => m.Title).ToList();
             }
         }
         //get movies by their category

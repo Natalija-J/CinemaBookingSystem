@@ -23,13 +23,13 @@ namespace CinemaBookingSystem
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("The list of Movies: ");
+            Console.Write("The list of Movies playing this week: ");
             Console.ResetColor();
             Console.WriteLine();
 
-            movie.GetMoviesPlayingToday().ForEach(movie =>
+            movie.GetMoviesPlayingThisWeek().ForEach(movie =>
             {
-                Console.WriteLine("'{0}' playing on {1}", movie.Title, movie.PlayingTime );
+                Console.WriteLine("'{0}' playing on {1}", movie.Title, movie.PlayingTime);
             });
         }
     }
