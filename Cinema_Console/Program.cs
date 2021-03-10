@@ -12,7 +12,9 @@ namespace CinemaBookingSystem
         {
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("The list of Categories: ");
+            Console.WriteLine("Welcome to Our Cinema!");
+            Console.WriteLine();
+            Console.Write("The list of Movie Categories: ");
             Console.ResetColor();
             Console.WriteLine();
 
@@ -23,11 +25,11 @@ namespace CinemaBookingSystem
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("The list of Movies playing this week: ");
+            Console.Write("This month we are showing these movies: ");
             Console.ResetColor();
             Console.WriteLine();
 
-            movie.GetMoviesPlayingThisWeek().ForEach(movie =>
+            movie.GetMoviesPlayingThisMonth().ForEach(movie =>
             {
                 Console.WriteLine("'{0}' playing on {1}", movie.Title, movie.PlayingTime);
             });

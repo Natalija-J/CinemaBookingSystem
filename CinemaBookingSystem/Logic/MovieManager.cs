@@ -9,15 +9,23 @@ namespace CinemaBookingSystem.Logic
     public class MovieManager
     {
         //getting movies that are playing now
-        public List<Movies> GetMoviesPlayingThisWeek()
+        public List<Movies> GetMoviesPlayingThisMonth()
         {
+                                   
+            //var thisWeekStart = baseDate.AddDays(-(int)baseDate.DayOfWeek);
+            //var thisWeekEnd = thisWeekStart.AddDays(7).AddSeconds(-1);
+           
+            //var thisMonthStart = baseDate.AddDays(1 - baseDate.Day);
+            //var thisMonthEnd = thisMonthStart.AddMonths(1).AddSeconds(-1);
+            
             using (var db = new CinemaDb())
             {
                 DateTime today = DateTime.Today;
-                DateTime week = today.AddDays(7);
+                var thisMonthStart = today.AddDays(1 - today.Day);
+                var thisMonthEnd = thisMonthStart.AddMonths(1).AddSeconds(-1);
                                 
-                return db.Movies.Where(m => m.PlayingTime == week)
-                                .OrderByDescending(m => m.Title).ToList();
+                return db.Movies.Where(m => m.PlayingTime >= thisMonthStart && m.PlayingTime <= thisMonthEnd)
+                                .OrderBy(m => m.PlayingTime).ToList();
             }
         }
         //get movies by their category
