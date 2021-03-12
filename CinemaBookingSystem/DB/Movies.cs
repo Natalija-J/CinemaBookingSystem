@@ -16,5 +16,7 @@ namespace CinemaBookingSystem.DB
         public int? Category { get; set; }
         public DateTime PlayingTime { get; set; }
         public string Image { get; set; }
+        public string Director { get; set; }
+        public string TextAbout { get; set; }
     }
 }
