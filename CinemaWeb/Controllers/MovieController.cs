@@ -1,4 +1,5 @@
 ﻿using CinemaBookingSystem.Logic;
+using CinemaWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,18 @@ namespace CinemaWeb.Controllers
         private MovieManager movies = new MovieManager();
         private BookingManager bookings = new BookingManager();
 
-        public IActionResult Categories()
+        public IActionResult Categories(int? id)
         {
+            CategoriesModel model = new CategoriesModel();
+            model.Categories = categories.GetAllCategories();
+            if (id.HasValue)
+            {
+                //here I am getting one category
+                model.ActiveCategory = categories.GetACategory(id.Value);
+
+                //here the movies that are under this category will be displayed
+                model.Movies = movies.GetMoviesByCategory(id.Value);
+            }
             var info = categories.GetAllCategories();
             return View(info);
         }

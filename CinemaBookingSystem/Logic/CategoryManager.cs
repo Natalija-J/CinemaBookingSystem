@@ -17,5 +17,13 @@ namespace CinemaBookingSystem.Logic
                 return db.Categories.OrderBy(c => c.Title).ToList();
             }
         }
+
+        public Categories GetACategory(int id)
+        {
+            using (var db = new CinemaDb())
+            {
+                return db.Categories.FirstOrDefault(c => c.Id == id);
+            }
+        }
     }
 }

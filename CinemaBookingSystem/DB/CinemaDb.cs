@@ -48,6 +48,8 @@ namespace CinemaBookingSystem.DB
 
             modelBuilder.Entity<Movies>(entity =>
             {
+                entity.Property(e => e.Image).HasMaxLength(500);
+
                 entity.Property(e => e.MainActor)
                     .IsRequired()
                     .HasMaxLength(50);

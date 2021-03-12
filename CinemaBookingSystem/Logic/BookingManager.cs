@@ -18,14 +18,19 @@ namespace CinemaBookingSystem.Logic
             }
         }
 
-        public List<Bookings> CancelUserBookings(int movieId)
+        public Movies CancelUserBookings(int movieId)
         {
             //returns a movie(movies) that was canceled by a client
-            using (var db = new CinemaDb())
-            {
-                return db.Bookings.Remove(m => m.MovieId == movieId).ToList();                    
-               
-            }
+            //using (var db = new CinemaDb())
+            //{
+            //    var cancelBooking = db.Bookings.FirstOrDefault(m => m.MovieId == movieId);
+            //    if (cancelBooking != null)
+            //    {
+            //        return db.Bookings.Remove(cancelBooking);
+            //    }
+                return null;
+
+            //}
         }
 
     }
