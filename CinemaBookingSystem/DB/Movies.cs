@@ -13,10 +13,12 @@ namespace CinemaBookingSystem.DB
         public string Title { get; set; }
         public int Year { get; set; }
         public string MainActor { get; set; }
-        public int? Category { get; set; }
+        public int Category { get; set; }
         public DateTime PlayingTime { get; set; }
         public string Image { get; set; }
         public string Director { get; set; }
         public string TextAbout { get; set; }
+        public int? AuditoriumId { get; set; }
+        public decimal? PriceId { get; set; }
     }
 }

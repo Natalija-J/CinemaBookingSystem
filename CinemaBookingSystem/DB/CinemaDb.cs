@@ -19,9 +19,11 @@ namespace CinemaBookingSystem.DB
         {
         }
 
+        public virtual DbSet<Auditorium> Auditorium { get; set; }
         public virtual DbSet<Bookings> Bookings { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
+        public virtual DbSet<Price> Price { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +36,13 @@ namespace CinemaBookingSystem.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Auditorium>(entity =>
+            {
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.TotalSeatsInArow).HasColumnName("TotalSeatsInARow");
+            });
+
             modelBuilder.Entity<Bookings>(entity =>
             {
                 entity.Property(e => e.WatchingTime).HasColumnType("datetime");
@@ -58,11 +67,22 @@ namespace CinemaBookingSystem.DB
 
                 entity.Property(e => e.PlayingTime).HasColumnType("datetime");
 
+                entity.Property(e => e.PriceId).HasColumnType("decimal(18, 0)");
+
                 entity.Property(e => e.TextAbout).HasMaxLength(3000);
 
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Price>(entity =>
+            {
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Price1)
+                    .HasColumnName("Price")
+                    .HasColumnType("decimal(4, 2)");
             });
 
             OnModelCreatingPartial(modelBuilder);
