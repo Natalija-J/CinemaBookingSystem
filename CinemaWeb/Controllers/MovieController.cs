@@ -26,8 +26,8 @@ namespace CinemaWeb.Controllers
                 //here the movies that are under this category will be displayed
                 model.Movies = movies.GetMoviesByCategory(id.Value);
             }
-            var info = categories.GetAllCategories();
-            return View(info);
+            
+            return View(model);
         }
 
         public IActionResult Movies()

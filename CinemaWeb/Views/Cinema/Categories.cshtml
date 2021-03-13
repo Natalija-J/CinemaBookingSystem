@@ -1,1 +1,37 @@
 ﻿@model CategoriesModel
+
+<ul class="nav nav-pills mb-3">
+    @foreach (var category in Model.Categories)
+    {
+        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "Categories" ? "active" : "")">
+            <a class="nav-link" asp-controller="Movie" asp-action="Categories" asp-route-id="@category.Id">@category.Title</a>
+        </li>
+    }
+</ul>
+@if (Model.ActiveCategory != null)
+{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="MoviesByCategory.html">@Model.ActiveCategory.Title</li>
+        </ol>
+    </nav>
+}
+<br />
+
+@if (Model.Movies != null)
+{
+    <div class="row">
+        @foreach (var movies in Model.Movies)
+        {
+            <div class="col-md-4 col-sm-12 mb-3">
+                <div class="card">
+                    <img class="card-img-top" src="@movies.Image" alt="Card image cap">
+                    <div class="card-body">
+                        <a asp-controller="Movie" asp-action="Movies" asp-route-id="@movies.Id">@movies.Title</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}
