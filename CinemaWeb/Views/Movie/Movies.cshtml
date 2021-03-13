@@ -1,0 +1,52 @@
+﻿@model MoviesModel
+
+<ul class="nav nav-pills mb-3">
+    @foreach (var category in Model.Categories)
+    {
+        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "Movies" ? "active" : "")">
+            <a class="nav-link" asp-controller="Movie" asp-action="MovieCategory" asp-route-id="@category.Id">@category.Title</a>
+        </li>
+    }
+</ul>
+@if (Model.ActiveCategory != null)
+{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">@Model.ActiveCategory.Title</li>
+            <li class="breadcrumb-item active">@Model.ActiveMovie.Title</li>
+        </ol>
+    </nav>
+}
+<br />
+
+<br />
+<div class="container">
+    <h2>@Model.ActiveMovie.Title</h2>
+    <table>
+        <tr>
+            <th class="float-right">@Model.ActiveMovie.TextAbout</th>
+            <th></th>
+            <img class="float-sm-left" src="@Model.ActiveMovie.Image" alt="Movie" width="154" height="236"></img>
+        </tr>
+    </table>
+
+
+    <br />
+    <table class="table table-striped">
+        <tr>
+            <th style="text-align: left">Movie</th>
+            <th style="text-align: left">Director</th>
+            <th style="text-align: left">Date Playing</th>
+            <th style="text-align: left">Time</th>
+            <th style="text-align: center">Select</th>
+        </tr>
+
+        <tr>
+            <td>@Model.ActiveMovie.Title</td>
+            <td>@Model.ActiveMovie.Director</td>
+            <td>@Model.ActiveMovie.PlayingTime.ToString("dd.MM.yy")</td>
+            <td>@Model.ActiveMovie.PlayingTime.ToString("HH:mm")</td>
+            <td style="text-align: center"><a asp-controller="Movies" asp-action="Bookings" asp-route-id="@Model.ActiveMovie.Id">Add</a></td>
+        </tr>
+    </table>
+</div>

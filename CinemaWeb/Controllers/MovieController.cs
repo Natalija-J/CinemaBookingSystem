@@ -28,29 +28,79 @@ namespace CinemaWeb.Controllers
             }
             
             return View(model);
+                       
         }
 
-        public IActionResult Movies()
+        public IActionResult MovieCategory(int id)
         {
-            var info = movies.GetMoviesPlayingThisMonth();
-            return View(info);
+            MoviesModel model = new MoviesModel();
+            model.Categories = categories.GetAllCategories();
+            
+                //here I am getting one category
+            model.ActiveCategory = categories.GetACategory(id);
+
+                //here the movies that are under this category will be displayed
+            model.ActiveMovie = movies.GetAMovie(id);
+            
+
+            return View(model);
+
         }
+
+
+        public IActionResult Movies(int? id)
+        {
+            MoviesModel model = new MoviesModel();
+            model.Categories = categories.GetAllCategories();
+            if (id.HasValue)
+            {
+                //here I am getting one chosen movie
+                model.ActiveMovie = movies.GetAMovie(id.Value);
+                
+            }
+
+            return View(model);            
+        }
+        
 
         public IActionResult MoviesThisWeek()
         {
-            var info = movies.GetMoviesPlayingThisWeek();
-            return View(info);
+            CategoriesModel model = new CategoriesModel(); 
+            model.Movies = movies.GetMoviesPlayingThisWeek();
+            return View(model);
         }
         public IActionResult MoviesComingSoon()
         {
-            var info = movies.GetComingSoonMovies();
-            return View(info);
+            CategoriesModel model = new CategoriesModel();
+            model.Movies = movies.GetComingSoonMovies();
+            return View(model);
         }
 
-        public IActionResult Bookings(int movieId)
+        
+        public IActionResult MonthFeatures()
         {
-            var info = bookings.GetUserBookings(movieId);
-            return View(info);
+            CategoriesModel model = new CategoriesModel();
+            model.Movies = movies.GetMoviesPlayingThisMonth();
+            return View(model);
         }
+
+        public IActionResult AllMovies()
+        {
+            CategoriesModel model = new CategoriesModel();
+            model.Movies = movies.GetAllMovies();
+            return View(model);
+        }
+        //public IActionResult Bookings(int movieId)
+        //{
+        //    BookingsModel model = new BookingsModel();
+        //    model.Movies = bookings.GetUserBookings(movieId).ToList();
+        //    return RedirectToAction(nameof(Bookings));
+        //}
+        //public IActionResult Cancelation(int movieId)
+        //{
+        //    BookingsModel model = new BookingsModel();
+        //    model.Movies = bookings.GetUserBookings(movieId).ToList();
+        //    return RedirectToAction(nameof(Bookings));
+        //}
     }
 }

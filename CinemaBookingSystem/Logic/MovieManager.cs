@@ -21,6 +21,15 @@ namespace CinemaBookingSystem.Logic
                                 .OrderBy(m => m.PlayingTime).ToList();
             }
         }
+        public List<Movies> GetAllMovies()
+        {
+            using (var db = new CinemaDb())
+            {
+                return db.Movies.OrderBy(m => m.Title)
+                                .ToList();
+            }
+        }
+
         //get movies by their category
         public List<Movies> GetMoviesByCategory(int category)
         {
@@ -55,6 +64,14 @@ namespace CinemaBookingSystem.Logic
 
                 return db.Movies.Where(m => m.PlayingTime >= thisWeekStart && m.PlayingTime <= thisWeekEnd)
                                 .OrderBy(m => m.PlayingTime).ToList();
+            }
+        }
+
+        public Movies GetAMovie(int id)
+        {
+            using (var db = new CinemaDb())
+            {
+                return db.Movies.FirstOrDefault(c => c.Id == id);
             }
         }
     }

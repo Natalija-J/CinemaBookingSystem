@@ -1,0 +1,27 @@
+﻿@model BookingsModel
+
+<h1>The movies you selected: </h1>
+
+<table class="table table-striped">
+    <tr>
+        <th style="text-align: left">Movie Title</th>
+        <th style="text-align: left">Directed by</th>
+        <th style="text-align: left">Showing on:</th>
+        <th style="text-align: center">Time</th>
+        <th 
+
+    </tr>
+    @foreach (var movie in Model.Movies)
+    {
+        <tr>
+            <td>@movie.Title</td>
+            <td>@movie.Director</td>
+            <td>@movie.PlayingTime.ToString("dd.MM.yyyy")</td>
+            <td>@movie.PlayingTime.ToString("HH:mm")</td>
+            
+
+            <td style="text-align: center"><a asp-controller="Library" asp-action="Return" asp-route-title="@movie.Title">Cancel</a></td>
+
+        </tr>
+    }
+</table>
