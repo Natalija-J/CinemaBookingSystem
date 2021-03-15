@@ -7,10 +7,11 @@ using System.Collections.Generic;
 
 namespace CinemaBookingSystem.DB
 {
-    public partial class Categories
+    public partial class Theaters
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
+        public int? TotalSeats { get; set; }
         public string Image { get; set; }
     }
 }

@@ -20,5 +20,6 @@ namespace CinemaBookingSystem.DB
         public string TextAbout { get; set; }
         public int? AuditoriumId { get; set; }
         public decimal? PriceId { get; set; }
+        public int? Length { get; set; }
     }
 }

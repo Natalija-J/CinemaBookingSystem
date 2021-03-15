@@ -70,19 +70,33 @@ namespace CinemaBookingSystem
                 Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
             });
 
-            //Console.WriteLine();
-            //Console.BackgroundColor = ConsoleColor.Red;
-            //ForegroundColorBlack();
-            //Console.Write("Please choose a movies by the category:");
-            //Console.ResetColor();
-            //int chosenCategory = int.Parse(Console.ReadLine());
-            //Console.WriteLine();
-            //movie.GetMoviesByCategory().FindAll(movie => movie.Category == chosenCategory)
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Red;
+            ForegroundColorBlack();
+            Console.Write("Please choose a movies by the category:");
+            Console.ResetColor();
+            int chosenCategory = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            movie.GetMoviesByCategory(chosenCategory).ForEach(movie =>
+            {
+                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
 
-            //movie.GetComingSoonMovies().Where(movie => movie.Category == chosenCategory).Foreach(movie =>
-            //{
-            //    Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
-            //});
+            });
+
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Red;
+            ForegroundColorBlack();
+            Console.Write("Please choose a movie by typing its title:");
+            Console.ResetColor();
+            string chosenmovie = Console.ReadLine();
+            Console.WriteLine();
+            
+            //booking.GetUserBookings(chosenmovie);
+            
+                Console.WriteLine("You have chosen '{0}' movie");
+
+
+
 
             static void BackgroundColorGreen()
             {

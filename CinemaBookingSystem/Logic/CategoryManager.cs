@@ -25,5 +25,21 @@ namespace CinemaBookingSystem.Logic
                 return db.Categories.FirstOrDefault(c => c.Id == id);
             }
         }
+
+        public string CreateNew(string title)
+        {
+            using (var db = new CinemaDb())
+            {
+               
+                    db.Categories.Add(new Categories()
+                    {
+                        Title = title,
+                    });
+
+                    db.SaveChanges();
+                
+                return null;
+            }
+        }
     }
 }

@@ -72,6 +72,7 @@ namespace CinemaWeb.Controllers
         public IActionResult MoviesComingSoon()
         {
             CategoriesModel model = new CategoriesModel();
+            
             model.Movies = movies.GetComingSoonMovies();
             return View(model);
         }

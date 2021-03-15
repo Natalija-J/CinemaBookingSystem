@@ -6,19 +6,35 @@ using System.Text;
 
 namespace CinemaBookingSystem.Logic
 {
+    
     public class BookingManager       
     {
         //Movies chosen by title
-        public List<Bookings> GetUserBookings(int movieId)
+        public Movies GetUserBookings(int movieId)
         {            
             //returns a movie that a client chose
             using (var db = new CinemaDb())
             {
-                return db.Bookings.Where(m => m.MovieId == movieId).ToList();
+                var movie = db.Movies.FirstOrDefault(m => m.Id == movieId);
+                var theater = db.Theaters.FirstOrDefault(t => t.Id == movie.AuditoriumId);
+                if (movie != null && theater.TotalSeats > 0)
+                {
+                    theater.TotalSeats--;
+                    db.Bookings.Add(new Bookings()
+                    {
+                        MovieId = movie.Id,
+                        WatchingTime =movie.PlayingTime
+                    });
+                    
+                    db.SaveChanges();
+                    return movie;
+                }               
+               //also need to count down the number of seats available at the auditorium
             }
+            return null;
         }
 
-        public void CancelUserBookings(int movieId)
+        public Movies CancelUserBookings(int movieId)
         {
             //returns a movie(movies) that was canceled by a client
             using (var db = new CinemaDb())
@@ -27,11 +43,16 @@ namespace CinemaBookingSystem.Logic
                 if (cancelBooking != null)
                 {
                     db.Bookings.Remove(cancelBooking);
-                }
-
-                db.SaveChanges();
+                    var cancelation = db.Movies.FirstOrDefault(m => m.Id == movieId);
+                    var returnedseat = db.Theaters.FirstOrDefault(t => t.Id == cancelation.AuditoriumId);
+                    
+                    returnedseat.TotalSeats++;
+                    db.SaveChanges();
+                    return cancelation;
+                }                
             }
+            return null;
         }
-
+        
     }
 }

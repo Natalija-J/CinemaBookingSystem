@@ -12,7 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cinema_App", "Cinema_App", 
 		Movie.html = Movie.html
 		MoviesByCategory.html = MoviesByCategory.html
 		MyBooking.html = MyBooking.html
-		mystyle.css = mystyle.css
 		NowPlaying.html = NowPlaying.html
 		StarCinema.html = StarCinema.html
 	EndProjectSection

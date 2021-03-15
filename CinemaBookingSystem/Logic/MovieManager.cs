@@ -21,6 +21,7 @@ namespace CinemaBookingSystem.Logic
                                 .OrderBy(m => m.PlayingTime).ToList();
             }
         }
+
         public List<Movies> GetAllMovies()
         {
             using (var db = new CinemaDb())
@@ -54,6 +55,22 @@ namespace CinemaBookingSystem.Logic
             }
         }
 
+        public string CreateNewMovie(string title)
+        {
+            using (var db = new CinemaDb())
+            {
+
+                db.Movies.Add(new Movies()
+                {
+                    Title = title,
+                });
+
+                db.SaveChanges();
+
+                return null;
+            }
+        }
+
         public List<Movies> GetMoviesPlayingThisWeek()
         {
             using (var db = new CinemaDb())
@@ -73,6 +90,7 @@ namespace CinemaBookingSystem.Logic
             {
                 return db.Movies.FirstOrDefault(c => c.Id == id);
             }
-        }
+        }      
+        
     }
 }
