@@ -69,11 +69,13 @@ namespace CinemaWeb.Controllers
             model.Movies = movies.GetMoviesPlayingThisWeek();
             return View(model);
         }
-        public IActionResult MoviesComingSoon()
+        public IActionResult MovieList(int? id)
         {
             CategoriesModel model = new CategoriesModel();
-            
-            model.Movies = movies.GetComingSoonMovies();
+            if (id.HasValue)
+            {
+                model.Movies = movies.GetComingSoonMovies();
+            }
             return View(model);
         }
 

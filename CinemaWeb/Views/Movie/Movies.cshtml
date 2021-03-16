@@ -26,8 +26,7 @@
         <tr>
             <th class="float-right">@Model.ActiveMovie.TextAbout</th>
             <th></th>
-            
-            <img class="float-sm-left" src="@Model.ActiveMovie.Image" alt="Movie" width="154" height="236"></img>
+            <th class="float-sm-left" src="@Model.ActiveMovie.Image" alt="Movie" width="154" height="236"></img>
         </tr>
     </table>
 
@@ -39,6 +38,7 @@
             <th style="text-align: left">Director</th>
             <th style="text-align: left">Date Playing</th>
             <th style="text-align: left">Time</th>
+            <th style="text-align: left">Price</th>
             <th style="text-align: center">Select</th>
         </tr>
 
@@ -47,6 +47,7 @@
             <td>@Model.ActiveMovie.Director</td>
             <td>@Model.ActiveMovie.PlayingTime.ToString("dd.MM.yy")</td>
             <td>@Model.ActiveMovie.PlayingTime.ToString("HH:mm")</td>
+            <td>@Model.ActiveMovie.PriceId</td>
             <td style="text-align: center"><a asp-controller="Movies" asp-action="Bookings" asp-route-id="@Model.ActiveMovie.Id">Add</a></td>
         </tr>
     </table>

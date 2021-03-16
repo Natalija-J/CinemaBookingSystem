@@ -1,4 +1,5 @@
-﻿using CinemaWeb.Models;
+﻿using CinemaBookingSystem.Logic;
+using CinemaWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,9 +12,11 @@ namespace CinemaWeb.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private MovieManager manager = new MovieManager();
         public IActionResult Index()
         {
+            MoviesModel model = new MoviesModel();
+            var comingSoon = manager.GetComingSoonMovies();
             return View();
         }
 

@@ -8,8 +8,6 @@
         <th style="text-align: left">Directed by</th>
         <th style="text-align: left">Showing on:</th>
         <th style="text-align: center">Time</th>
-        <th 
-
     </tr>
     @foreach (var movie in Model.Movies)
     {
@@ -20,8 +18,7 @@
             <td>@movie.PlayingTime.ToString("HH:mm")</td>
             
 
-            <td style="text-align: center"><a asp-controller="Library" asp-action="Return" asp-route-title="@movie.Title">Cancel</a></td>
-
+            <td style="text-align: center"><a asp-controller="Booking" asp-action="Cancel" asp-route-id="@movie.Id">Cancel</a></td>
         </tr>
     }
 </table>

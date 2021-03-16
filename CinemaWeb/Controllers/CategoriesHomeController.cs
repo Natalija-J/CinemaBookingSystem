@@ -13,20 +13,20 @@ namespace CinemaWeb.Controllers
         private CategoryManager categories = new CategoryManager();
         private MovieManager movies = new MovieManager();
         
-        public IActionResult Categories(int? id)
+        public IActionResult Index(int? id)
         {
             CategoriesHomeModel model = new CategoriesHomeModel();
             model.Categories = categories.GetAllCategories();
-            
+            if (id.HasValue)
+            {
                 //here I am getting one category
                 model.ActiveCategory = categories.GetACategory(id.Value);
 
                 //here the movies that are under this category will be displayed
                 model.Movies = movies.GetMoviesByCategory(id.Value);
-            
 
+            }
             return View(model);
-
         }
     }
 }

@@ -6,35 +6,35 @@ using System;
 
 namespace CinemaWeb.Controllers
 {
-    //private CategoryManager manager = new CategoryManager();
+   
     public class CategoryController : Controller
     {
+        private CategoryManager manager = new CategoryManager();
         [HttpGet]
         public IActionResult Create()
         {
             CategoryModel model = new CategoryModel();
             return View(model);
         }
-    }
 
-    [HttpPost]
-    public IActionResult Create(CategoryModel model)
-    {
-        if (ModelState.IsValid)
+        [HttpPost]
+        public IActionResult Create(CategoryModel model)
         {
+            if (ModelState.IsValid)
+            {
 
-            var result = manager.CreateNew(model.Title);
-            if (String.IsNullOrEmpty(result))
-            {
-                return RedirectToAction("Categories", "Movie");
+                var result = manager.CreateNew(model.Title);
+                if (String.IsNullOrEmpty(result))
+                {
+                    return RedirectToAction("Categories", "Movie");
+                }
+                else
+                {
+                    ModelState.AddModelError("validation", result);
+                }
             }
-            else
-            {
-                ModelState.AddModelError("validation", result);
-            }
+            return View(model);
         }
-        return View(model);
     }
-
 
 }

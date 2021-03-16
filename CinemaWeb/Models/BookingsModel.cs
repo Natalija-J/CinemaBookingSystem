@@ -11,5 +11,7 @@ namespace CinemaWeb.Models
         public List<Movies> Movies { get; set; }
         public List<Bookings> Bookings { get; set; }
         public Movies Movie { get; set; }
+        public Bookings SingleBooking { get; set; }
+
     }
 }

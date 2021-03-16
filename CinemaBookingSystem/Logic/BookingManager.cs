@@ -19,6 +19,7 @@ namespace CinemaBookingSystem.Logic
                 var theater = db.Theaters.FirstOrDefault(t => t.Id == movie.AuditoriumId);
                 if (movie != null && theater.TotalSeats > 0)
                 {
+                    //also need to count down the number of seats available at the auditorium
                     theater.TotalSeats--;
                     db.Bookings.Add(new Bookings()
                     {
@@ -29,7 +30,7 @@ namespace CinemaBookingSystem.Logic
                     db.SaveChanges();
                     return movie;
                 }               
-               //also need to count down the number of seats available at the auditorium
+               
             }
             return null;
         }
