@@ -20,20 +20,20 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="nav justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Home" asp-action="Index">Welcome</a>
+                        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Welcome</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Movie" asp-action="Movies">Coming Soon</a>
+                        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "MovieList" ? "active" : "")">
+                            <a class="nav-link" asp-controller="Movie" asp-action="MovieList">Coming Soon</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="CategoriesHome" asp-action="Index">Categories</a>
+                        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                            <a class="nav-link" asp-controller="CategoriesHome" asp-action="Categories">Categories</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Movie" asp-action="Bookings">My Movies</a>
+                        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "Bookings" ? "active" : "")">
+                            <a class="nav-link" asp-controller="Booking" asp-action="Bookings">My Movies</a>
                         </li>                    
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "ContactUs" ? "active" : "")">
+                            <a class="nav-link" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                         </li>
                     </ul>
                 </div>

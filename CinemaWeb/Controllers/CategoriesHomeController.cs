@@ -13,9 +13,9 @@ namespace CinemaWeb.Controllers
         private CategoryManager categories = new CategoryManager();
         private MovieManager movies = new MovieManager();
         
-        public IActionResult Index(int? id)
+        public IActionResult Categories(int? id)
         {
-            CategoriesHomeModel model = new CategoriesHomeModel();
+            MoviesModel model = new MoviesModel();
             model.Categories = categories.GetAllCategories();
             if (id.HasValue)
             {

@@ -58,47 +58,79 @@ namespace CinemaBookingSystem
                 Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
             });
 
-            Console.WriteLine();
-            BackgroundColorGreen();
-            ForegroundColorBlack();
-            Console.Write("Coming soon:");
-            Console.ResetColor();
-            Console.WriteLine();
-
-            movie.GetComingSoonMovies().ForEach(movie =>
-            {
-                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
-            });
+            
 
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Red;
             ForegroundColorBlack();
-            Console.Write("Please choose a movies by the category:");
+            Console.Write("Please choose movies by the category:");
             Console.ResetColor();
-            int chosenCategory = int.Parse(Console.ReadLine());
+            string chosenCategory = Console.ReadLine();
             Console.WriteLine();
-            movie.GetMoviesByCategory(chosenCategory).ForEach(movie =>
-            {
-                Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
-
+            var desire = category.GetAllCategories().Find(c => c.Title.ToLower() == chosenCategory.ToLower()); 
+            
+            movie.GetMoviesByCategory(desire.Id).ForEach(movie =>
+            { 
+             Console.WriteLine("Movie '{0}' (id# {1}, '{2}') ----  playing on --- {3}", movie.Title, movie.Id, movie.Category, movie.PlayingTime);
             });
 
-            Console.WriteLine();
-            Console.BackgroundColor = ConsoleColor.Red;
-            ForegroundColorBlack();
-            Console.Write("Please choose a movie by typing its title:");
-            Console.ResetColor();
-            string chosenmovie = Console.ReadLine();
-            Console.WriteLine();
             
-            //booking.GetUserBookings(chosenmovie);
-            
-                Console.WriteLine("You have chosen '{0}' movie");
+
+            while (true)
+            {
+                Console.WriteLine();
+                Console.BackgroundColor = ConsoleColor.Red;
+                ForegroundColorBlack();
+                Console.Write("Please choose a movie by typing its id number (or 'stop' to quit:");
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                
+                Console.WriteLine();
+                if (input.ToLower() == "stop")
+                {
+                    break;
+                }
+                int inputN = int.Parse(input);
+                var userChoice = booking.GetUserBookings(inputN);
+                
+                    Console.WriteLine("You have chosen '{0}' movie", movie.GetAMovie(inputN).Title);              
+            }
+
+            while (true)
+            {
+                Console.WriteLine();
+                Console.BackgroundColor = ConsoleColor.Red;
+                ForegroundColorBlack();
+                Console.Write("Would you like to cancel the reservation (y/n)? ");
+                Console.ResetColor();
+                string cancel = Console.ReadLine();
+                
+                Console.WriteLine();
+                if (cancel.ToLower() == "n" || cancel.ToLower() == "no")
+                {
+                    break;
+                }
+
+                Console.WriteLine();
+                Console.BackgroundColor = ConsoleColor.Red;
+                ForegroundColorBlack();
+                Console.Write("What movie would you like to cancel? Type in movie id number:  ");
+                Console.ResetColor();
+                string id = Console.ReadLine();
+                int cancelN = int.Parse(id);
+
+                var delete = booking.CancelUserBookings(cancelN);
 
 
+                Console.WriteLine("You have chosen '{0}' movie", delete.Title);
+
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Thank you for choosing our Cinema!");
 
 
-            static void BackgroundColorGreen()
+        static void BackgroundColorGreen()
             {
                 Console.BackgroundColor = ConsoleColor.Green;
             }

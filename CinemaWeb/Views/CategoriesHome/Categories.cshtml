@@ -1,10 +1,10 @@
-﻿@model CategoriesHomeModel
+﻿@model CategoriesModel
 
 <ul class="nav nav-pills mb-3">
     @foreach (var category in Model.Categories)
     {
-        <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "Movies" ? "active" : "")">
-            <a class="nav-link" asp-controller="CategoriesHome" asp-action="CategoriesHome" asp-route-id="@category.Id">
+        <li class="nav-item">
+            <a class="nav-link @(category.Id == Model.ActiveMovie.Category ? "active" : "")" asp-controller="Movie" asp-action="Categories" asp-route-id="@category.Id">
                 @category.Title
             </a>
             <img src="@category.Image" alt="@category.Title" style="width:200px;height:250px;">

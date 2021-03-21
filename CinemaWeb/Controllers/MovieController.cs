@@ -16,7 +16,7 @@ namespace CinemaWeb.Controllers
 
         public IActionResult Categories(int? id)
         {
-            CategoriesModel model = new CategoriesModel();
+            MoviesModel model = new MoviesModel();
             model.Categories = categories.GetAllCategories();
             if (id.HasValue)
             {
@@ -51,12 +51,12 @@ namespace CinemaWeb.Controllers
         public IActionResult Movies(int? id)
         {
             MoviesModel model = new MoviesModel();
-            model.Categories = categories.GetAllCategories();
+
             if (id.HasValue)
             {
                 //here I am getting one chosen movie
-                model.ActiveMovie = movies.GetAMovie(id.Value);
-                
+                model.Movies = movies.GetMoviesPlayingThisMonth();
+                model.Categories = categories.GetAllCategories();
             }
 
             return View(model);            
@@ -65,7 +65,7 @@ namespace CinemaWeb.Controllers
 
         public IActionResult MoviesThisWeek()
         {
-            CategoriesModel model = new CategoriesModel(); 
+            MoviesModel model = new MoviesModel(); 
             model.Movies = movies.GetMoviesPlayingThisWeek();
             return View(model);
         }
@@ -79,17 +79,9 @@ namespace CinemaWeb.Controllers
             return View(model);
         }
 
-        
-        public IActionResult MonthFeatures()
-        {
-            CategoriesModel model = new CategoriesModel();
-            model.Movies = movies.GetMoviesPlayingThisMonth();
-            return View(model);
-        }
-
         public IActionResult AllMovies()
         {
-            CategoriesModel model = new CategoriesModel();
+            MoviesModel model = new MoviesModel();
             model.Movies = movies.GetAllMovies();
             return View(model);
         }

@@ -41,5 +41,18 @@ namespace CinemaBookingSystem.Logic
                 return null;
             }
         }
+
+        //to delete a category
+        public void Delete(int id)
+        {
+            using (var db = new CinemaDb())
+            {
+                var category = db.Categories.FirstOrDefault(c => c.Id == id);
+                db.Categories.Remove(category);
+
+                db.SaveChanges();
+            }
+
+        }
     }
 }

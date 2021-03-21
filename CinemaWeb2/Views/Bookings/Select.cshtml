@@ -1,0 +1,27 @@
+﻿@model List<CinemaBookingSystem.DB.Bookings>
+
+
+<h1>Movies you have selected</h1>
+
+<table class="table table-striped">
+    <tr>
+        <th style="text-align: left">Movie</th>
+        <th style="text-align: left">Playing date </th>
+        <th style="text-align: left">Time</th>
+        <th style="text-align: left">Price</th>        
+        <th style="text-align: center">Action</th>
+
+    </tr>
+    
+
+
+     <tr>
+            <td>Title</td>
+            <td>Date</td>
+            <td>Time</td>
+            <td>Price</td>            
+            <td style="text-align: center"><a asp-controller="Cinema" asp-action="Cancel">Cancel</a></td>
+
+      </tr>
+    
+</table>

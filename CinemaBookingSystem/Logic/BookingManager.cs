@@ -10,7 +10,8 @@ namespace CinemaBookingSystem.Logic
     public class BookingManager       
     {
         //Movies chosen by title
-        public Movies GetUserBookings(int movieId)
+        //gets a list of all movies chosen by the user
+        public List<Bookings> GetUserBookings(int movieId)
         {            
             //returns a movie that a client chose
             using (var db = new CinemaDb())
@@ -19,7 +20,7 @@ namespace CinemaBookingSystem.Logic
                 var theater = db.Theaters.FirstOrDefault(t => t.Id == movie.AuditoriumId);
                 if (movie != null && theater.TotalSeats > 0)
                 {
-                    //also need to count down the number of seats available at the auditorium
+                    //need to count down the number of seats available at the auditorium
                     theater.TotalSeats--;
                     db.Bookings.Add(new Bookings()
                     {
@@ -28,13 +29,14 @@ namespace CinemaBookingSystem.Logic
                     });
                     
                     db.SaveChanges();
-                    return movie;
+                    return db.Bookings.OrderBy(c => c.MovieId).ToList(); 
                 }               
                
             }
             return null;
         }
 
+        
         public Movies CancelUserBookings(int movieId)
         {
             //returns a movie(movies) that was canceled by a client
@@ -53,6 +55,14 @@ namespace CinemaBookingSystem.Logic
                 }                
             }
             return null;
+        }
+
+        public List<Movies> ShowUserBookings()
+        {
+            using (var db = new CinemaDb())
+            {
+                return db.Movies.OrderBy(m => m.Title).ToList();
+            }
         }
         
     }

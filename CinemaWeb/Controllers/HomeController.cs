@@ -13,22 +13,18 @@ namespace CinemaWeb.Controllers
     public class HomeController : Controller
     {
         private MovieManager manager = new MovieManager();
+        private CategoryManager manager1 = new CategoryManager();
         public IActionResult Index()
         {
-            MoviesModel model = new MoviesModel();
-            var comingSoon = manager.GetComingSoonMovies();
-            return View();
+            //MoviesModel model = new MoviesModel();
+            CategoriesModel model = new CategoriesModel();
+            model.Movies = manager.GetComingSoonMovies();
+            return View(model);
         }
 
         public IActionResult ContactUs()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        }        
     }
 }

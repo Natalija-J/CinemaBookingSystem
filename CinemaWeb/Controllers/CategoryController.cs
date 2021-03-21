@@ -1,4 +1,5 @@
-﻿using CinemaBookingSystem.Logic;
+﻿using CinemaBookingSystem;
+using CinemaBookingSystem.Logic;
 using CinemaWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,15 +23,20 @@ namespace CinemaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                var result = manager.CreateNew(model.Title);
-                if (String.IsNullOrEmpty(result))
+                try
                 {
-                    return RedirectToAction("Categories", "Movie");
+                    manager.CreateNew(model.Title);
+                    return RedirectToAction(nameof(Create));
                 }
-                else
+
+                catch (LogicException ex)
                 {
-                    ModelState.AddModelError("validation", result);
+                    ModelState.AddModelError("validation", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    // some other unexpected error
+                    ModelState.AddModelError("validation", ex.Message);
                 }
             }
             return View(model);
