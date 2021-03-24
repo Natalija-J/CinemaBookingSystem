@@ -13,15 +13,16 @@
 
     </tr>
     
-
+    @foreach (var movie in Model.SelectedMovies)
+    {
 
      <tr>
-            <td>@Model.SelectedMovie.Title</td>
-            <td>@Model.SelectedMovie.PlayingTime.ToString("dd.MM.yyyy")</td>
-            <td>@Model.SelectedMovie.PlayingTime.ToString("HH:mm")</td>
-            <td>@Model.SelectedMovie.PriceId</td>            
+            <td>@movie.Title</td>
+            <td>@movie.PlayingTime.ToString("dd.MM.yyyy")</td>
+            <td>@movie.PlayingTime.ToString("HH:mm")</td>
+            <td>@movie.PriceId</td>            
             <td style="text-align: center"><a asp-controller="Bookings" asp-action="Cancel">Cancel</a></td>
 
       </tr>
-    
+    }
 </table>

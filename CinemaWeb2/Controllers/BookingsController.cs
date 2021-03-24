@@ -14,7 +14,7 @@ namespace CinemaWeb2.Controllers
         public IActionResult Select(int id)
         {
             BookingsModel model = new BookingsModel();
-            model.SelectedMovie = manager.GetUserBookings(id);
+            model.SelectedMovies = manager.GetUserBookings(id);
 
             return View(model);
         }
