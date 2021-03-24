@@ -11,7 +11,7 @@ namespace CinemaBookingSystem.Logic
     {
         //Movies chosen by title
         //gets a list of all movies chosen by the user
-        public List<Bookings> GetUserBookings(int movieId)
+        public List<Movies> GetUserBookings(int movieId)
         {            
             //returns a movie that a client chose
             using (var db = new CinemaDb())
@@ -23,13 +23,13 @@ namespace CinemaBookingSystem.Logic
                     //need to count down the number of seats available at the auditorium
                     theater.TotalSeats--;
                     db.Bookings.Add(new Bookings()
-                    {
+                    {   
                         MovieId = movie.Id,
                         WatchingTime =movie.PlayingTime
                     });
                     
                     db.SaveChanges();
-                    return db.Bookings.OrderBy(c => c.MovieId).ToList(); 
+                    return db.Movies.OrderBy(c => c.Id).ToList(); 
                 }               
                
             }

@@ -13,14 +13,15 @@ namespace CinemaWeb2.Controllers
         private BookingManager manager = new BookingManager();
         public IActionResult Select(int id)
         {
-            var movies = manager.GetUserBookings(id);
+            BookingsModel model = new BookingsModel();
+            model.SelectedMovie = manager.GetUserBookings(id);
 
-            return View(movies);
+            return View(model);
         }
 
         public IActionResult Cancel(int id)
         {
-            var movies= manager.CancelUserBookings(id);
+            manager.CancelUserBookings(id);
 
             return RedirectToAction(nameof(Select));
         }

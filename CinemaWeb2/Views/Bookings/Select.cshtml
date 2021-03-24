@@ -1,4 +1,4 @@
-﻿@model List<CinemaBookingSystem.DB.Bookings>
+﻿@model BookingsModel
 
 
 <h1>Movies you have selected</h1>
@@ -16,11 +16,11 @@
 
 
      <tr>
-            <td>Title</td>
-            <td>Date</td>
-            <td>Time</td>
-            <td>Price</td>            
-            <td style="text-align: center"><a asp-controller="Cinema" asp-action="Cancel">Cancel</a></td>
+            <td>@Model.SelectedMovie.Title</td>
+            <td>@Model.SelectedMovie.PlayingTime.ToString("dd.MM.yyyy")</td>
+            <td>@Model.SelectedMovie.PlayingTime.ToString("HH:mm")</td>
+            <td>@Model.SelectedMovie.PriceId</td>            
+            <td style="text-align: center"><a asp-controller="Bookings" asp-action="Cancel">Cancel</a></td>
 
       </tr>
     
